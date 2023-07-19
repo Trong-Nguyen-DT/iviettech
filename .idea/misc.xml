@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/Users/pom.xml" />
         <option value="$PROJECT_DIR$/Product/pom.xml" />
         <option value="$PROJECT_DIR$/SpringJPA/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringBookMVC/pom.xml" />
       </list>
     </option>
   </component>

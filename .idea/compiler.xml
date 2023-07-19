@@ -9,6 +9,7 @@
         <module name="Account" />
         <module name="Product" />
         <module name="SpringJPA" />
+        <module name="SpringBookMVC" />
         <module name="Users" />
       </profile>
     </annotationProcessing>
@@ -17,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Account" options="-parameters" />
       <module name="Product" options="-parameters" />
+      <module name="SpringBookMVC" options="-parameters" />
       <module name="SpringJPA" options="-parameters" />
       <module name="Users" options="-parameters" />
     </option>
