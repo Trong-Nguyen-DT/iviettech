@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+</head>
+<body>
+  <h2>Register an Account</h2>
+  <form action="/users/register" method="POST" th:object="${user}">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" th:field="*{name}"/><br><br>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" th:field="*{username}"><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" th:field="*{password}"><br><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" th:field="*{age}"><br><br>
+
+    <button type="submit">Đăng ký</button>
+  </form>
+</body>
+</html>

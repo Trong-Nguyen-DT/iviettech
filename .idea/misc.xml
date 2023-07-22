@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <type id="Spring" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -9,7 +12,14 @@
         <option value="$PROJECT_DIR$/Product/pom.xml" />
         <option value="$PROJECT_DIR$/SpringJPA/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBookMVC/pom.xml" />
+        <option value="$PROJECT_DIR$/BookMVC/pom.xml" />
+        <option value="$PROJECT_DIR$/MVCBook/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/BookMVC/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">

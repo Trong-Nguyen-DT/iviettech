@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Detail</title>
+</head>
+<body>
+<h1>Book Detail</h1>
+    <div>
+        <label for="id">ID:</label>
+        <span th:text="${book.id}"></span>
+    </div>
+    <div>
+        <label for="content">Content:</label>
+        <span th:text="${book.content}"></span>
+    </div>
+    <div>
+        <label for="numberOfPage">Number of Pages:</label>
+        <span th:text="${book.numberOfPage}"></span>
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <span th:text="${book.price}"></span>
+    </div>
+    <div>
+        <label for="publishDate">Publish Date:</label>
+        <span th:text="${book.publishDate}"></span>
+    </div>
+    <div>
+        <label for="bookId">Book ID:</label>
+        <span th:text="${book.bookId}"></span>
+    </div>
+    <a th:href="@{/books}">Back</a>
+</body>
+</html>

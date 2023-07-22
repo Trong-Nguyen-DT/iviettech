@@ -7,16 +7,22 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Account" />
+        <module name="MVCBook" />
         <module name="Product" />
         <module name="SpringJPA" />
         <module name="SpringBookMVC" />
         <module name="Users" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BookMVC" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Account" options="-parameters" />
+      <module name="BookMVC" options="-parameters" />
+      <module name="MVCBook" options="-parameters" />
       <module name="Product" options="-parameters" />
       <module name="SpringBookMVC" options="-parameters" />
       <module name="SpringJPA" options="-parameters" />
