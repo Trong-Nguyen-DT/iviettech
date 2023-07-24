@@ -1,8 +1,11 @@
 package iviettech.vn.mvcbook.domain;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Book {
     private Long id;
     private String author;
+    @NotBlank
     private String name;
     private Long categoryId;
     private BookDetail bookDetail;
