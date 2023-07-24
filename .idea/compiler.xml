@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Account" />
+        <module name="ShoppingMVC" />
         <module name="MVCBook" />
         <module name="Product" />
         <module name="SpringJPA" />
@@ -24,6 +25,7 @@
       <module name="BookMVC" options="-parameters" />
       <module name="MVCBook" options="-parameters" />
       <module name="Product" options="-parameters" />
+      <module name="ShoppingMVC" options="-parameters" />
       <module name="SpringBookMVC" options="-parameters" />
       <module name="SpringJPA" options="-parameters" />
       <module name="Users" options="-parameters" />
