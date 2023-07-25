@@ -6,8 +6,6 @@ import com.shop.shoppingmvc.service.OrderDetailService;
 import com.shop.shoppingmvc.service.OrderService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CartController {
 
     @Autowired
