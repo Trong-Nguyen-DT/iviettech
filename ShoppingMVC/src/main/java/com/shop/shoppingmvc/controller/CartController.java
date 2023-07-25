@@ -55,4 +55,13 @@ public class CartController {
         orderDetailService.addOrderDetail(orderEntity, cartEntity.getAllCartItems());
         return "thankyou";
     }
+    @GetMapping("emty")
+    public String empty() {
+        cartEntity.emptyCart();
+        return "redirect:/cart";
+    }
+    @GetMapping("back")
+    public String back() {
+        return "redirect:/home";
+    }
 }
