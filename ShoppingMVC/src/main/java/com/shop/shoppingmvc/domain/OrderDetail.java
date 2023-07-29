@@ -1,10 +1,5 @@
 package com.shop.shoppingmvc.domain;
 
-import com.shop.shoppingmvc.entity.OrderEntity;
-import com.shop.shoppingmvc.entity.ProductEntity;
-
-import java.util.List;
-
 public class OrderDetail {
     private int id;
     private int orderId;

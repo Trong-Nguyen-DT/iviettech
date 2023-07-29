@@ -31,7 +31,7 @@
         </tfoot>
     </table>
 
-    <form method="post" action="/checkout">
+    <form th:method="post" th:action="@{/cart/checkout}">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         <br>

@@ -14,14 +14,16 @@
             <th>Add to Cart</th>
         </tr>
         </thead>
-        <tbody th:each="product : ${products}">
+        <tbody th:each="prod : ${products}">
         <tr>
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.price}"></td>
+            <td th:text="${prod.id}"></td>
+            <td th:text="${prod.name}"></td>
+            <td th:text="${prod.price}"></td>
             <td>
-                <form th:action="@{/add-to-cart}" method="post">
-                    <input type="hidden" name="id" th:value="${product.id}" />
+                <form th:action="@{/home}" th:method="post" th:object="${product}">
+                    <input type="hidden" name="id" th:value="${prod.id}" />
+                    <input type="hidden" name="name" th:value="${prod.name}" />
+                    <input type="hidden" name="price" th:value="${prod.price}" />
                     <button type="submit">Add to Cart</button>
                 </form>
             </td>

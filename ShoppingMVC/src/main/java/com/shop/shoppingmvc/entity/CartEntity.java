@@ -1,75 +1,66 @@
 package com.shop.shoppingmvc.entity;
 
-import com.shop.shoppingmvc.converter.ProductConverter;
-import com.shop.shoppingmvc.domain.CartItem;
-import com.shop.shoppingmvc.domain.Product;
-import com.shop.shoppingmvc.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.shop.shoppingmvc.converter.OrderDetailConverter;
+import com.shop.shoppingmvc.domain.OrderDetail;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CartEntity implements Serializable {
-    @Autowired
-    private ProductRepository productRepository;
-    private final Map<Integer, Integer> productEntities = new HashMap<>();
+    private static final long serialVersionUID = 1L;
+    private OrderEntity orderEntity = new OrderEntity();
+    public void add(ProductEntity productEntity) {
+        Optional<OrderDetailEntity> existingDetail = orderEntity.getOrderDetails().stream()
+                .filter(item -> Objects.equals(item.getProductEntity().getId(), productEntity.getId()))
+                .findFirst();
 
-    public void addItem(int productId) {
-        ProductEntity productEntity = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
-        count(productEntity);
+        if (existingDetail.isPresent()) {
+            existingDetail.get().setQuantity(existingDetail.get().getQuantity() + 1);
+        } else {
+            OrderDetailEntity detail = new OrderDetailEntity();
+            detail.setProductEntity(productEntity);
+            detail.setQuantity(1);
+            orderEntity.getOrderDetails().add(detail);
+        }
     }
 
-    public void removeItem(int id) {
-        int quantity = productEntities.getOrDefault(id, 0);
-        if (quantity > 1) {
-            productEntities.put(id, quantity - 1);
-        } else {
-            productEntities.remove(id);
-        }
+
+    public void remove(Integer id) {
+        OrderDetailEntity detail = Optional.of(orderEntity.getOrderDetails())
+                .orElse(new ArrayList<>())
+                .stream()
+                .filter(item -> Objects.equals(item.getProductEntity().getId(), id))
+                .findFirst()
+                .orElse(new OrderDetailEntity());
+
+        orderEntity.getOrderDetails().remove(detail);
     }
     public int count(ProductEntity productEntity) {
-        int productId = productEntity.getId();
-        int quantity = productEntities.getOrDefault(productId, 0);
-        productEntities.put(productId, quantity + 1);
-        return productEntities.size();
+        long existingCount = orderEntity.getOrderDetails().stream()
+                .filter(item -> Objects.equals(item.getProductEntity().getId(), productEntity.getId()))
+                .count();
+        return (int) existingCount + 1;
     }
     public void emptyCart() {
-        productEntities.clear();
+        orderEntity.setOrderDetails(List.of());
     }
 
-    public List<CartItem> getAllCartItems() {
-        List<CartItem> cartItems = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : productEntities.entrySet()) {
-            int productId = entry.getKey();
-            int quantity = entry.getValue();
-            ProductEntity productEntity = productRepository.findById(productId)
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
-
-            Product product = ProductConverter.toModel(productEntity);
-            CartItem cartItem = new CartItem(product, quantity);
-            cartItems.add(cartItem);
-        }
-        return cartItems;
+    public List<OrderDetail> getAllCartItems() {
+        return orderEntity.getOrderDetails().stream().map(OrderDetailConverter::toModel).collect(Collectors.toList());
     }
     public double getTotalPrice() {
         double totalPrice = 0.0;
-        for (Map.Entry<Integer, Integer> entry : productEntities.entrySet()) {
-            int productId = entry.getKey();
-            int quantity = entry.getValue();
-            ProductEntity productEntity = productRepository.findById(productId)
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
-
-            Product product = ProductConverter.toModel(productEntity);
-            double productPrice = product.getPrice();
-            totalPrice += productPrice * quantity;
+        for (OrderDetailEntity detail : orderEntity.getOrderDetails()) {
+            ProductEntity product = detail.getProductEntity();
+            int quantity = detail.getQuantity();
+            double price = product.getPrice();
+            totalPrice += price * quantity;
         }
         return totalPrice;
     }

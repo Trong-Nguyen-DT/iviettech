@@ -15,14 +15,14 @@
                 <th>Remove</th>
             </tr>
         </thead>
-        <tbody th:each="cart, stat : ${cartItems}">
+        <tbody th:each="cart, stat : ${orderdetails}">
             <tr>
                 <td th:text="${stat.index + 1}"></td>
                 <td th:text="${cart.product.name}"></td>
                 <td th:text="${cart.product.price}"></td>
                 <td th:text="${cart.quantity}"></td>
                 <td>
-                    <form th:action="@{/remove-product}" method="post">
+                    <form th:action="@{/cart/remove}" method="post">
                       <input type="hidden" name="id" th:value="${cart.product.id}" />
                       <button type="submit">X</button>
                     </form>
@@ -30,9 +30,9 @@
             </tr>
         </tbody>
     </table>
-    <button><a th:href="@{/back}">Back</a></button>
-    <button><a th:href="@{/emty}">Empty</a></button>
-    <button><a th:href="@{/pay}">Pay</a></button>
+    <button><a th:href="@{/cart/back}">Back</a></button>
+    <button><a th:href="@{/cart/emty}">Empty</a></button>
+    <button><a th:href="@{/cart/pay}">Pay</a></button>
 
 </body>
 </html>

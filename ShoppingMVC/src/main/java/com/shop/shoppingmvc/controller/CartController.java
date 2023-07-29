@@ -8,34 +8,28 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("cart")
 public class CartController {
 
     @Autowired
     private CartEntity cartEntity;
     @Autowired
-    private OrderDetailService orderDetailService;
-    @Autowired
     private OrderService orderService;
+    @Autowired
+    private OrderDetailService orderDetailService;
 
-    @GetMapping("cart")
+    @GetMapping
     public String showProductByCart(Model model) {
-        model.addAttribute("cartItems", cartEntity.getAllCartItems());
+        model.addAttribute("orderdetails", cartEntity.getAllCartItems());
         return "cart";
     }
-    @PostMapping("/add-to-cart")
-    public String addItemToCart(@RequestParam int id, Model model) {
-        cartEntity.addItem(id);
-        model.addAttribute("message", "Add success");
-        return "redirect:/home";
-    }
-    @PostMapping("/remove-product")
-    public String removeItem(@RequestParam int id, Model model) {
-        cartEntity.removeItem(id);
+    @PostMapping("/remove")
+    public String removeItem(@RequestParam Integer id, Model model) {
+        System.out.println(id);
+        cartEntity.remove(id);
         model.addAttribute("message", "Add success");
         return "redirect:/cart";
     }
@@ -47,9 +41,13 @@ public class CartController {
     }
     @PostMapping("checkout")
     @Transactional
-    public String checkOut(@RequestParam("name") String name, @RequestParam("address") String address) {
+    public String checkOut(@RequestParam("name") String name, @RequestParam("address") String address, Model model) {
         OrderEntity orderEntity = orderService.addOrder(name, address);
         orderDetailService.addOrderDetail(orderEntity, cartEntity.getAllCartItems());
+        model.addAttribute("name", name);
+        model.addAttribute("address", address);
+        model.addAttribute("products", cartEntity.getAllCartItems());
+        model.addAttribute("cartTotal", cartEntity.getTotalPrice());
         return "thankyou";
     }
     @GetMapping("emty")
