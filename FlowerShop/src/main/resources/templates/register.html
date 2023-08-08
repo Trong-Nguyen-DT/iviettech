@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register User</title>
+</head>
+<body>
+    <form th:action="signup" th:method="post" th:object="${user}">
+        <span>Username: </span>
+        <input type="text" th:field="*{username}">
+        <span>Password: </span>
+        <input type="password" th:field="*{password}">
+        <span> Re Password: </span>
+        <input type="password" th:field="*{rePassword}">
+        <button type="submit">Sign up</button>
+    </form>
+</body>
+</html>

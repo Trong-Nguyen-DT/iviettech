@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+</head>
+<body>
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="title" placeholder="Search by title"/>
+        <input type="submit" value="Search"/>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>NewsId</th>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Create Day</th>
+                <th>Staff Name</th>
+                <th>Cate Name</th>
+            </tr>
+        </thead>
+        <tbody th:each=" news :${listNews}">
+            <tr>
+                <td th:text="${news.newsId}"></td>
+                <td th:text="${news.title}"></td>
+                <td th:text="${news.summary}"></td>
+                <td th:text="${news.createdDate}"></td>
+                <td th:text="${news.staffEntity.staffName}"></td>
+                <td th:text="${news.categoryEntity.cateName}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form th:method="post" th:action="@{news}" th:object="${newEntity}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" th:field="*{title}" required>
+        <br>
+        <label for="summary">Summary:</label>
+        <input type="text" id="summary" th:field="*{summary}" required>
+        <br>
+        <label>Staff Name</label>
+        <select th:field="*{staffEntity}">
+            <option th:each="staff : ${staffs}" th:value="${staff.staffId}" th:text="${staff.staffName}"></option>
+        </select>
+        <label>Cate Name</label>
+        <select th:field="*{categoryEntity}">
+            <option th:each="category : ${categories}" th:value="${category.cateId}" th:text="${category.cateName}"></option>
+        </select>
+        <button type="submit">Add New</button>
+    </form>
+
+</body>
+</html>

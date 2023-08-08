@@ -7,13 +7,15 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CartEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
     private OrderEntity orderEntity = new OrderEntity();
     public void add(ProductEntity productEntity) {
         Optional<OrderDetailEntity> existingDetail = orderEntity.getOrderDetails().stream()

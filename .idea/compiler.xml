@@ -8,8 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Account" />
         <module name="ShoppingMVC" />
+        <module name="FlowerShop" />
         <module name="MVCBook" />
+        <module name="PaymentGateway" />
         <module name="Product" />
+        <module name="NVTNM07" />
         <module name="SpringJPA" />
         <module name="SpringBookMVC" />
         <module name="Users" />
@@ -23,7 +26,10 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Account" options="-parameters" />
       <module name="BookMVC" options="-parameters" />
+      <module name="FlowerShop" options="-parameters" />
       <module name="MVCBook" options="-parameters" />
+      <module name="NVTNM07" options="-parameters" />
+      <module name="PaymentGateway" options="-parameters" />
       <module name="Product" options="-parameters" />
       <module name="ShoppingMVC" options="-parameters" />
       <module name="SpringBookMVC" options="-parameters" />
